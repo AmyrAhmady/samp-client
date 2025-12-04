@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-ServerInfo = namedtuple('ServerInfo', ['password', 'players', 'max_players', 'hostname', 'gamemode', 'language'])
+ServerInfo = namedtuple('ServerInfo', ['password', 'players', 'max_players', 'hostname', 'gamemode', 'language', 'queue_players'])
 Rule = namedtuple('Rule', ['name', 'value'])
 Client = namedtuple('Client', ['name', 'score'])
 ClientDetail = namedtuple('ClientDetail', ['id', 'name', 'score', 'ping'])
