@@ -61,12 +61,13 @@ class SampClient(object):
     def get_server_info(self):
         response = self.send_request(OPCODE_INFO)
 
-        offset = 0
-        hostname = decode_string(response, 5, 4)
-        offset += len(hostname)
-        gamemode = decode_string(response, offset + 9, 4)
-        offset += len(gamemode)
-        language = decode_string(response, offset + 13, 4)
+        offset = 5
+        hostname = decode_string(response, offset, 4)
+        offset += 4 + len(hostname)
+        gamemode = decode_string(response, offset, 4)
+        offset += 4 + len(gamemode)
+        language = decode_string(response, offset, 4)
+        offset += 4 + len(language)
 
         return ServerInfo(
             password=bool(response[0]),
@@ -75,6 +76,7 @@ class SampClient(object):
             hostname=hostname,
             gamemode=gamemode,
             language=language,
+            queue_players=decode_int(response[offset:offset + 2]),
         )
 
     def get_server_rules(self):
